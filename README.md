@@ -37,7 +37,7 @@ Actions:
 * Web - Farm Web
 * Wood - Farm Wood
 
-** AR and Farm actions will take place until energy is depleted **
+**AR and Farm actions will take place until energy is depleted**
 
 #### Example:
 user pass AF;AR;FGF
