@@ -1,2 +1,2 @@
-# NaM
-Bots
+# Not a Moneky
+Collection of scripts
