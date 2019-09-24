@@ -1,2 +1,2 @@
 # Not a Moneky
-Collection of scripts
+Collection of bots
