@@ -18,8 +18,9 @@ After it all depends on the bot.
 
 Current options:
 * -h : firefox will run in headless mode (you won't see it)
-* -r : routine, must be proceeded by a file that contains a list of accounts and their routines
+* -r : routine, must be proceeded by a file that contains a list of accounts and their routines (it's made for bots as it uses tor)
 * -ca: create accounts, must be proceeded by an ammount and a file in which emails and passwords will be stored
+* -f: routine for mains, must be proceeded by a file that contains a list of accounts and their routines  (uses normal firefox)
 
 ### Using routines
 The account list must be in the next format
@@ -36,8 +37,18 @@ Actions:
 * Ink - Farm Ink
 * Web - Farm Web
 * Wood - Farm Wood
+* zabuza - Attack ToG Zabuza
+* zabuza2 - Attack ToG Zabuza for LW
+* Jinin - Attack ToG Jinin
+* Jinin2- Attack ToG Jinin for LW
+* Jinpachi - Attack ToG Jinpachi
+* Ameyuri - Attack ToG Ameyuri
+* Kushimaru - Attack ToG Kushimaru
+* Kushimaru2 - Attack ToG Kushimaru for LW
+* Fuguki - Attack ToG Fuguki
+* Mangestu - Attack ToG Mangestu
 
-**AR and Farm actions will take place until energy is depleted**
+**AR, Farm and ToG actions will take place until energy is depleted**
 
 #### Example:
 user pass AF;AR;FGF
