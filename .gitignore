@@ -1,2 +1,4 @@
 src/geckodriver.log
 .vscode/settings.json
+src/nm_friends
+geckodriver.log

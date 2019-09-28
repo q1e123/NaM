@@ -1,5 +1,6 @@
 import time
 import sys
+from selenium.webdriver.common.keys import Keys
 
 from driver_tor import DriverTor
 from driver_ff import DriverFirefox
@@ -81,10 +82,13 @@ def farm_noref(xpath,energy_cost):
 		driver.click('//*[@id="modal-battle"]/div/div[4]/div/div[3]/div/div/div[2]/div[2]/span')
 		time.sleep(1)
 
+def mission(link,xpath):
+	driver.goto(link)
+	driver.click(xpath)
+
 def farm(link, xpath, energy_cost):
 	while get_WE() > energy_cost:
-		driver.goto(link)
-		driver.click(xpath)
+		mission(link,xpath)
 
 def gold_frozen():
 	farm('https://www.ninjamanager.com/world/area/frozen-island',
@@ -198,12 +202,14 @@ def make_orders():
 	orders['Mangestu']  = tog_mangestu
 
 	# LWs
-	orders['demonic_flute'] = lw_demonic_flute
+	orders['Demonic_flute'] = lw_demonic_flute
 
 	# Progress
-	orders['intro']  = prg_intro
-	orders['snow']   = prg_snow
-	orders['frozen'] = prg_frozen
+	orders['Intro']  = prg_intro
+	orders['Snow']   = prg_snow
+	orders['Frozen'] = prg_frozen
+	
+	orders['Friends'] = add_friends
 	return orders
 
 def routine(filename):
@@ -266,50 +272,58 @@ def _skip():
 	_clicknwait('/html/body/div[1]/main/div[2]/div[1]/div/div[4]/div/div[1]/div/div/div[2]/div[1]/span')
 	_clicknwait('/html/body/div[1]/main/div[2]/div[1]/div/div[4]/div/div[3]/div/div/div[2]/div[2]/span')
 
-def add_friends(friends):
+def add_friends():
+	friends = list()
+	with open('nm_friends') as file:
+		for line in file:
+			friends.append(line)
+	driver.click('//*[@id="left-sidebar-menu"]/div[1]/a[3]/i')
+	time.sleep(3)
 	for friend in friends:
-		driver.send_keys('//*[@id="friends-search-teamname"]', friend)
-		_clicknwait('/html/body/div[1]/main/div[2]/div[3]/div/div[4]/div/div[2]/div[2]/div[2]/div[2]/span')
+		driver.click('/html/body/div[1]/main/div[2]/div[3]/div/div[4]/div/div[2]/div[2]/div[2]/div[1]/input')
+		driver.send_keys('/html/body/div[1]/main/div[2]/div[3]/div/div[4]/div/div[2]/div[2]/div[2]/div[1]/input', Keys.CONTROL + 'A')
+		driver.send_keys('/html/body/div[1]/main/div[2]/div[3]/div/div[4]/div/div[2]/div[2]/div[2]/div[1]/input', Keys.BACKSPACE)
+		driver.send_keys('/html/body/div[1]/main/div[2]/div[3]/div/div[4]/div/div[2]/div[2]/div[2]/div[1]/input', friend)
+		driver.send_keys('/html/body/div[1]/main/div[2]/div[3]/div/div[4]/div/div[2]/div[2]/div[2]/div[1]/input', Keys.RETURN)		
+		time.sleep(3)
 		driver.click('/html/body/div[1]/main/div[2]/div[3]/div/div[4]/div/div[2]/div[1]/div[2]/div/div/div[3]/div')
+		time.sleep(2)
+
+		
 
 def prg_snow():
 	driver.goto('https://www.ninjamanager.com/world/village/hidden-leaf')
 	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[2]/div[2]/div/div/div[1]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/snow-country')
-	driver.click('//*[@id="content"]/div[3]/div/div/div[2]/div[3]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/snow-country')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[3]/div/div/div[2]/div[4]/div[2]/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/snow-country')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[4]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/snow-country')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[4]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/snow-country')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[5]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/snow-country')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[5]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]/span')
+	
+	link = 'https://www.ninjamanager.com/world/area/snow-country'
+	mission(link, '//*[@id="content"]/div[3]/div/div/div[2]/div[2]/div/div[4]/div/div[2]')
+	mission(link, '//*[@id="content"]/div[3]/div/div/div[2]/div[3]/div/div[4]/div/div[2]')
+	mission(link, '/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[3]/div/div/div[2]/div[4]/div[2]/div[4]/div/div[2]')
+
+	mission(link, '//*[@id="content"]/div[4]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]')
+	mission(link, '//*[@id="content"]/div[4]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]')
+
+	mission(link, '//*[@id="content"]/div[5]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]')
+	mission(link, '//*[@id="content"]/div[5]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]')
+
 
 def prg_frozen():
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[2]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[3]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[3]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[3]/div[2]/div/div[2]/div[4]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[4]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[4]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[4]/div[2]/div/div[2]/div[4]/div[2]/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[5]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]/span')
-	driver.goto('https://www.ninjamanager.com/world/area/frozen-island')
-	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[5]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]/span')
-	_skip()
+	link = 'https://www.ninjamanager.com/world/area/frozen-island'
+
+	mission(link, '//*[@id="content"]/div[2]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]')
+	mission(link, '//*[@id="content"]/div[2]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]')
+	
+	mission(link, '//*[@id="content"]/div[3]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]')
+	mission(link, '//*[@id="content"]/div[3]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]')
+	mission(link, '//*[@id="content"]/div[3]/div[2]/div/div[2]/div[4]/div/div[4]/div/div[2]')
+
+
+	mission(link, '//*[@id="content"]/div[4]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]')
+	mission(link, '//*[@id="content"]/div[4]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]')
+	mission(link, '//*[@id="content"]/div[4]/div[2]/div/div[2]/div[4]/div[2]/div[4]/div/div[2]')
+
+	mission(link, '//*[@id="content"]/div[5]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]')
+	mission(link, '//*[@id="content"]/div[5]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]')
 	time.sleep(3)
 	_skip()
 
@@ -378,11 +392,7 @@ def prg_intro():
 	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[2]/div[2]/div/div/div[1]/span/b')
 	
 	setup_attacks()
-	friends = list()
-	with open('friends') as file:
-		for line in file:
-			friends.append(line)
-	add_friends(friends)
+	
 
 	attack_friends()
 	attack_random()

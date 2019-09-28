@@ -47,8 +47,14 @@ Actions:
 * Kushimaru2 - Attack ToG Kushimaru for LW
 * Fuguki - Attack ToG Fuguki
 * Mangestu - Attack ToG Mangestu
+* Demonic_flute - Farms demonic flute LW
+* Snow - Does all missions in Snow Country
+* Frozen - Does all missions in Frozen Island
+* Intro - Does the all the stuff until Forest (intended for new bots)
+
 
 **AR, Farm and ToG actions will take place until energy is depleted**
 
+**Progress actions will stop if mission failed so it's best used on beginner**
 #### Example:
 user pass AF;AR;FGF
