@@ -50,7 +50,8 @@ Actions:
 * Demonic_flute - Farms demonic flute LW
 * Snow - Does all missions in Snow Country
 * Frozen - Does all missions in Frozen Island
-* Intro - Does the all the stuff until Forest (intended for new bots)
+* Friends - Adds friends from nm_friends file
+* Intro - Does the all the stuff until Forest (Snow, Frozen, Friends, the intro missions) **intended for new bots**
 
 
 **AR, Farm and ToG actions will take place until energy is depleted**
