@@ -1,5 +1,5 @@
 # Not a Moneky
-Collection of bots made for educational purposes O:)
+Collection of bots
 
 # Current bots
 * ninjamanager
@@ -12,50 +12,5 @@ I am going to use one pipenv for all bots, so it doesn't matter what bot you wan
 
 After it all depends on the bot.
 
-## ninjamanager
-
-> pipenv run python ninjamanager.py <OPTIONS>
-
-Current options:
-* -h : firefox will run in headless mode (you won't see it)
-* -r : routine, must be proceeded by a file that contains a list of accounts and their routines (it's made for bots as it uses tor)
-* -ca: create accounts, must be proceeded by an ammount and a file in which emails and passwords will be stored
-* -f: routine for mains, must be proceeded by a file that contains a list of accounts and their routines  (uses normal firefox)
-
-### Using routines
-The account list must be in the next format
-username_or_email password first_action;second_action;...
-
-Actions:
-* AF - Attack friends
-* AR - Attack random
-* FGF - Farm gold frozen island
-* FGD - Farm gold deadshore
-* FGT - Farm gold tsunade
-* FGP - Farm gold panda
-* Dice - Farm dice
-* Ink - Farm Ink
-* Web - Farm Web
-* Wood - Farm Wood
-* zabuza - Attack ToG Zabuza
-* zabuza2 - Attack ToG Zabuza for LW
-* Jinin - Attack ToG Jinin
-* Jinin2- Attack ToG Jinin for LW
-* Jinpachi - Attack ToG Jinpachi
-* Ameyuri - Attack ToG Ameyuri
-* Kushimaru - Attack ToG Kushimaru
-* Kushimaru2 - Attack ToG Kushimaru for LW
-* Fuguki - Attack ToG Fuguki
-* Mangestu - Attack ToG Mangestu
-* Demonic_flute - Farms demonic flute LW
-* Snow - Does all missions in Snow Country
-* Frozen - Does all missions in Frozen Island
-* Friends - Adds friends from nm_friends file
-* Intro - Does the all the stuff until Forest (Snow, Frozen, Friends, the intro missions) **intended for new bots**
-
-
-**AR, Farm and ToG actions will take place until energy is depleted**
-
-**Progress actions will stop if mission failed so it's best used on beginner**
-#### Example:
-user pass AF;AR;FGF
+# Disclaimer
+Made for educational purposes **ONLY**

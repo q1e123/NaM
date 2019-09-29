@@ -1,3 +1,5 @@
+#!/usr/bin/env pipenv-shebang
+
 import time
 import sys
 from selenium.webdriver.common.keys import Keys
