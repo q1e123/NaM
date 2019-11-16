@@ -1,3 +1,8 @@
+import time
+
+from selenium.webdriver.common.keys import Keys
+
+
 class GuerrillaMail:
         @staticmethod
         def goto_site(driver):

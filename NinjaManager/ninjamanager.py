@@ -172,7 +172,6 @@ def _clicknwait(xpath):
 	driver.click(xpath)
 	time.sleep(3.5)
 
-
 def make_orders():
 	orders = dict()
 	# Arena
@@ -226,20 +225,34 @@ def routine(filename):
 				continue
 			login(user,passwd)
 			print("Logged to " + user)
+			
 			order_list = orders.split(';')
 
-			if 'AR' in order_list or 'AF' in order_list:
-				setup_attacks()
-			for order in order_list:
-				print("Started doing " + order)
-				order_dict[order]()
-				print("Stopped doing " + order)
+			try:
+				if get_AE() < 5:
+					driver.newID()
+					continue
+
+				if get_WE() < 5:
+					driver.newID()
+					continue
+				if 'AR' in order_list or 'AF' in order_list:
+					setup_attacks()
+				for order in order_list:
+					print("Started doing " + order)
+					order_dict[order]()
+					print("Stopped doing " + order)
+			except:
+				driver.newID()
+				print('!!! ERROR !!! ')
+				continue
+			
 			driver.newID()
 	
 	driver.driver.quit()
 
 def create_accounts(ammount, filename):
-	file = open(filename, 'a')
+	file = open(filename, 'a+')
 	file.write('\n')
 	for _ in range(ammount):
 		user = utils.random_string_alphanum()
@@ -291,8 +304,6 @@ def add_friends():
 		driver.click('/html/body/div[1]/main/div[2]/div[3]/div/div[4]/div/div[2]/div[1]/div[2]/div/div/div[3]/div')
 		time.sleep(2)
 
-		
-
 def prg_snow():
 	driver.goto('https://www.ninjamanager.com/world/village/hidden-leaf')
 	driver.click('/html/body/div[1]/main/div[2]/div[5]/div[2]/div[1]/div/div[2]/div[2]/div/div/div[1]/span')
@@ -307,7 +318,6 @@ def prg_snow():
 
 	mission(link, '//*[@id="content"]/div[5]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]')
 	mission(link, '//*[@id="content"]/div[5]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]')
-
 
 def prg_frozen():
 	link = 'https://www.ninjamanager.com/world/area/frozen-island'
@@ -408,6 +418,7 @@ def prg_intro():
 	prg_frozen()
 	gold_frozen()
 
+
 if '-h' in sys.argv:
 	headless = True
 else:
@@ -422,7 +433,7 @@ if '-r' in sys.argv:
 
 if '-ca' in sys.argv:
 	i = sys.argv.index('-ca')
-	n = sys.argv[i+1]
+	n = int(sys.argv[i+1])
 	fn = sys.argv[i+2]
 	create_accounts(n,fn)
 
