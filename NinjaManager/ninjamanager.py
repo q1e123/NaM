@@ -1,5 +1,3 @@
-#!/usr/bin/env pipenv-shebang
-
 import time
 import sys
 from selenium.webdriver.common.keys import Keys
@@ -92,6 +90,7 @@ def farm(link, xpath, energy_cost):
 	while get_WE() > energy_cost:
 		mission(link,xpath)
 
+
 def gold_frozen():
 	farm('https://www.ninjamanager.com/world/area/frozen-island',
 	     '//*[@id="content"]/div[2]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]/span', 4)
@@ -168,6 +167,28 @@ def lw_demonic_flute():
 	farm('https://www.ninjamanager.com/world/area/ryuichi-cave',
 	     '//*[@id="content"]/div[3]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]/span', 6)
 
+def daily_recipe():
+	driver.goto("https://www.ninjamanager.com/forge")
+	driver.click('//*[@id="daily-recipe-button"]/span')
+	driver.click('//*[@id="craft-button-learn"]/span')
+
+def daily_wheel_material():
+	driver.goto("https://www.ninjamanager.com/forge")
+	driver.click('//*[@id="start-daily-reward"]/span')
+	time.sleep(5)
+	driver.click('//*[@id="content"]/div[2]/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/span')
+
+def daily_wheel_gold():
+	driver.goto("https://www.ninjamanager.com/forge")
+	driver.click('//*[@id="start-daily-reward"]/span')
+	time.sleep(5)
+	driver.click('//*[@id="content"]/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div/span')
+
+def material_iron_snow():
+	farm('https://www.ninjamanager.com/world/area/snow-country', 
+		 '//*[@id="content"]/div[4]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]/span', 4)
+
+
 def _clicknwait(xpath):
 	driver.click(xpath)
 	time.sleep(3.5)
@@ -185,10 +206,11 @@ def make_orders():
 	orders['FGP'] = gold_panda
 
 	# Material
-	orders['Dice'] = material_dice
-	orders['Ink']  = material_ink
-	orders['Web']  = material_web
-	orders['Wood'] = material_wood
+	orders['Dice']	= material_dice
+	orders['Ink']  	= material_ink
+	orders['Web']	= material_web
+	orders['Wood']	= material_wood
+	orders['IronS']	= material_iron_snow
 
 	# TOG
 	orders['Zabuza']    = tog_zabuza
@@ -210,7 +232,12 @@ def make_orders():
 	orders['Snow']   = prg_snow
 	orders['Frozen'] = prg_frozen
 	
+	# Other
 	orders['Friends'] = add_friends
+	orders['Recipe'] = daily_recipe
+	orders['WheelM'] = daily_wheel_material
+	orders['WheelG'] = daily_wheel_gold
+
 	return orders
 
 def routine(filename):
