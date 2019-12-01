@@ -193,6 +193,10 @@ def _clicknwait(xpath):
 	driver.click(xpath)
 	time.sleep(3.5)
 
+def logout():
+	driver.goto('https://www.ninjamanager.com/')
+	driver.click('//*[@id="site-container"]/header/div[1]/div/div[2]/div[2]/a[3]/div/span')
+
 def make_orders():
 	orders = dict()
 	# Arena
@@ -240,7 +244,17 @@ def make_orders():
 
 	return orders
 
+def kill_acc(driver):
+	if isinstance(driver,DriverTor):
+		driver.newID()
+		return driver
+	else:
+		logoff()
+		return driver
+
+
 def routine(filename):
+	global driver
 	order_dict = make_orders()
 
 	with open(filename) as file:
@@ -257,11 +271,11 @@ def routine(filename):
 
 			try:
 				if get_AE() < 5:
-					driver.newID()
+					driver = kill_acc(driver)
 					continue
 
 				if get_WE() < 5:
-					driver.newID()
+					driver = kill_acc(driver)
 					continue
 				if 'AR' in order_list or 'AF' in order_list:
 					setup_attacks()
@@ -270,11 +284,12 @@ def routine(filename):
 					order_dict[order]()
 					print("Stopped doing " + order)
 			except:
-				driver.newID()
+				driver = kill_acc(driver)
 				print('!!! ERROR !!! ')
 				continue
 			
-			driver.newID()
+			
+			driver = kill_acc(driver)
 	
 	driver.driver.quit()
 
@@ -445,7 +460,6 @@ def prg_intro():
 	prg_frozen()
 	gold_frozen()
 
-
 if '-h' in sys.argv:
 	headless = True
 else:
@@ -453,6 +467,7 @@ else:
 
 
 driver = DriverTor(headless)
+
 
 if '-r' in sys.argv:
 	i = sys.argv.index('-r')
