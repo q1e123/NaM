@@ -175,13 +175,13 @@ def daily_recipe():
 def daily_wheel_material():
 	driver.goto("https://www.ninjamanager.com/forge")
 	driver.click('//*[@id="start-daily-reward"]/span')
-	time.sleep(5)
+	time.sleep(10)
 	driver.click('//*[@id="content"]/div[2]/div[2]/div/div[1]/div[2]/div[1]/div/div[1]/span')
 
 def daily_wheel_gold():
 	driver.goto("https://www.ninjamanager.com/forge")
 	driver.click('//*[@id="start-daily-reward"]/span')
-	time.sleep(5)
+	time.sleep(10)
 	driver.click('//*[@id="content"]/div[2]/div[2]/div/div[1]/div[2]/div[2]/div/div/span')
 
 def material_iron_snow():
@@ -197,6 +197,47 @@ def logout():
 	driver.goto('https://www.ninjamanager.com/')
 	driver.click('//*[@id="site-container"]/header/div[1]/div/div[2]/div[2]/a[3]/div/span')
 
+def material_dark_chakra_eel():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[2]/div[2]/div/div[2]/div[3]/div[1]/div[4]/div/div[2]',5)
+
+def material_granite():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[2]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]',5)
+
+def material_serpent_scale():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[3]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]',5)
+
+def material_lava():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[3]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]',5)
+
+def material_quicklime():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[3]/div[2]/div/div[2]/div[4]/div/div[4]/div/div[2]',5)
+
+def lw_firestorm_staff():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[4]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]',5)
+
+def lw_occult_grimoire():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[5]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]',5)
+
+def material_uchiha_crest():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[5]/div[2]/div/div[2]/div[3]/div[2]/div[4]/div/div[2]',5)
+
+def material_serpent_soul():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[6]/div[2]/div/div[2]/div[2]/div/div[4]/div/div[2]',5)
+	
+def material_cursed_feather():
+	farm('https://www.ninjamanager.com/world/area/moryo-shrine',
+		 '//*[@id="content"]/div[6]/div[2]/div/div[2]/div[3]/div/div[4]/div/div[2]',5)
+	
+
 def make_orders():
 	orders = dict()
 	# Arena
@@ -210,26 +251,36 @@ def make_orders():
 	orders['FGP'] = gold_panda
 
 	# Material
-	orders['Dice']	= material_dice
-	orders['Ink']  	= material_ink
-	orders['Web']	= material_web
-	orders['Wood']	= material_wood
-	orders['IronS']	= material_iron_snow
+	orders['Dice']				= material_dice
+	orders['Ink']  				= material_ink
+	orders['Web']				= material_web
+	orders['Wood']				= material_wood
+	orders['IronS']				= material_iron_snow
+	orders['Dark_chakraEal']	= material_dark_chakra_eel
+	orders['Granite']			= material_granite
+	orders['Serpent_scale']		= material_serpent_scale
+	orders['Serpent_soul']		= material_serpent_soul
+	orders['Lava']				= material_lava
+	orders['Quicklime']			= material_quicklime
+	orders['Uchiha_crest']		= material_uchiha_crest
+	orders['Cursed_feather']	= material_cursed_feather
 
 	# TOG
-	orders['Zabuza']    = tog_zabuza
-	orders['Zabuza2']   = tog_zabuza2
-	orders['Jinin']     = tog_jinin
-	orders['Jinin2']    = tog_jinin2
-	orders['Jinpachi']  = tog_jinpachi
-	orders['Ameyuri']   = tog_ameyuri
-	orders['Kushimaru'] = tog_kushimaru
-	orders['Kushimaru2'] = tog_kushimaru2
-	orders['Fuguki']    = tog_fuguki
-	orders['Mangestu']  = tog_mangestu
+	orders['Zabuza']    	= tog_zabuza
+	orders['Zabuza2']  		= tog_zabuza2
+	orders['Jinin']     	= tog_jinin
+	orders['Jinin2']    	= tog_jinin2
+	orders['Jinpachi']  	= tog_jinpachi
+	orders['Ameyuri']   	= tog_ameyuri
+	orders['Kushimaru'] 	= tog_kushimaru
+	orders['Kushimaru2'] 	= tog_kushimaru2
+	orders['Fuguki']    	= tog_fuguki
+	orders['Mangestu']  	= tog_mangestu
 
 	# LWs
-	orders['Demonic_flute'] = lw_demonic_flute
+	orders['Demonic_flute'] 	= lw_demonic_flute
+	orders['Firestorm_staff'] 	= lw_firestorm_staff
+	orders['Occult_grimoire'] 	= lw_occult_grimoire
 
 	# Progress
 	orders['Intro']  = prg_intro
@@ -237,10 +288,10 @@ def make_orders():
 	orders['Frozen'] = prg_frozen
 	
 	# Other
-	orders['Friends'] = add_friends
-	orders['Recipe'] = daily_recipe
-	orders['WheelM'] = daily_wheel_material
-	orders['WheelG'] = daily_wheel_gold
+	orders['Friends'] 	= add_friends
+	orders['Recipe'] 	= daily_recipe
+	orders['WheelM'] 	= daily_wheel_material
+	orders['WheelG'] 	= daily_wheel_gold
 
 	return orders
 
