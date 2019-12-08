@@ -256,7 +256,7 @@ def make_orders():
 	orders['Web']				= material_web
 	orders['Wood']				= material_wood
 	orders['IronS']				= material_iron_snow
-	orders['Dark_chakraeel']	= material_dark_chakra_eel
+	orders['Dark_chakra_eel']	= material_dark_chakra_eel
 	orders['Granite']			= material_granite
 	orders['Serpent_scale']		= material_serpent_scale
 	orders['Serpent_soul']		= material_serpent_soul
